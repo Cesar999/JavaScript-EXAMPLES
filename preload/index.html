@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="progress"></div>
+    <div id="gallery"></div>
+
+    <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
+
+    <script>
+        let progress = document.getElementById('progress');
+        let gallery = document.getElementById('gallery');
+
+        var queue = new createjs.LoadQueue(false);
+
+        queue.on("progress", event => {
+            //console.log(event);
+            let progress = Math.floor(event.progress * 100);
+            this.progress.style.width = progress+'%';
+            if(progress == 100){
+                console.log('All done');
+                document.querySelector('body').style.background = 'white';
+            }
+        });
+
+        queue.on("complete", event => {
+            console.log(event);
+            gallery.classList.add('fadeIn');
+            setTimeout(()=>{
+                progress.classList.add('fadeOut');
+            },500);
+        });
+
+
+        queue.on("fileload", handleFileComplete);
+
+        queue.loadFile('https://www.whats-on-netflix.com/wp-content/uploads/2018/07/is-the-lord-of-the-rings-trilogy-on-netflix-2018.jpg');
+        queue.loadFile('http://itsagtv.com/wp-content/uploads/2016/10/john-wick-chapter-2-movie-traile.jpg');
+        queue.loadFile('https://cdn-images-1.medium.com/max/1600/0*BJpVov4Nn8vOzJr-.jpg');
+        queue.loadFile('https://i.ytimg.com/vi/AwUey0GgQQQ/maxresdefault.jpg');
+        queue.loadFile('https://www.humanityhouse.org/wp-content/uploads/2015/05/lordie-1200x796.jpg');
+
+        function handleFileComplete(event){
+            var item = event.item;
+            var type = item.type;
+            console.log(event);
+            if(type == createjs.Types.IMAGE){
+                gallery.appendChild(event.result);
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

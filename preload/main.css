@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    height: 100vh;
+    background: rgb(29,29,29);
+    transition: background-color 2s ease;
+}
+
+#progress{
+    height: 8px;
+    background: plum;
+    border: 2px solid gray;
+    position: absolute;
+    top: 45%;
+    opacity: 1;
+    z-index: 2;
+    transition: width 0.1s ease;
+}
+
+#gallery{
+    margin: 1% auto;
+    opacity: 0; 
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2,25%);
+    grid-gap: 5em;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    transform: scale(0.8);
+}
+
+img{
+    width: 100%;
+    cursor: pointer;
+    transition: transform 2s;
+}
+
+.fadeIn{
+    transform: scale(1);
+    opacity: 1 !important; 
+    transition: opacity 1s 1.5s;
+}
+
+.fadeOut{
+    opacity: 0 !important; 
+    transition: opacity 2s;
+}
+
+
+img:hover{
+    transform: scale(1.5);
+}
